@@ -190,7 +190,7 @@ public class ArgParse {
         return null;
     }
 
-    public static Problem makeProblem(String[] args, String problemName, MLP mlp) {
+    public static Problem makeProblem(String problemName, MLP mlp) {
         if (problemName == null) {
             problemName = "OR";
         }

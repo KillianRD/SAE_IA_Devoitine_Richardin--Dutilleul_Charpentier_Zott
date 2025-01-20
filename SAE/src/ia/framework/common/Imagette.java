@@ -23,15 +23,6 @@ public class Imagette {
     }
 
     /**
-     * Setter de l'attribut numero
-     *
-     * @param numero le numéro de l'imagette
-     */
-    public void setEtiquette(double numero) {
-        this.etiquette = numero;
-    }
-
-    /**
      * Getter de l'attribut numero
      *
      * @return le numéro de l'imagette

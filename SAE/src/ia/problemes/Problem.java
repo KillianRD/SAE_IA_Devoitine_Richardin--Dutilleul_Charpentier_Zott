@@ -35,8 +35,4 @@ public abstract class Problem {
             }
         }
     }
-
-    public void train() {
-
-    }
 }

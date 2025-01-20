@@ -22,7 +22,7 @@ public class LancerRecherche {
         String func_name = ArgParse.getActivationFuncFromCmd(args);
 
         MLP mlp = ArgParse.makeMLP(args, func_name);
-        Problem p = ArgParse.makeProblem(args, prob_name, mlp);
+        Problem p = ArgParse.makeProblem(prob_name, mlp);
 
         p.execute();
     }
