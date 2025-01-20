@@ -1,6 +1,6 @@
-package ia.framework.MLP;
+package ia.framework.MLP.transferfunction;
 
-public class Tanh implements TransferFunction {
+public class TanH implements TransferFunction {
     @Override
     public double evaluate(double value) {
         return Math.tanh(value);

@@ -1,4 +1,4 @@
-package ia.framework.MLP;
+package ia.framework.MLP.transferfunction;
 
 public class Sigmoide implements TransferFunction{
     @Override
