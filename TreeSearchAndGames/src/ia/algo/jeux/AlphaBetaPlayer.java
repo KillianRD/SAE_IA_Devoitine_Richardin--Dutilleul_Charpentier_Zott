@@ -7,7 +7,8 @@ import ia.framework.jeux.GameState;
 import ia.framework.jeux.Player;
 
 public class AlphaBetaPlayer extends Player {
-
+    private int profondeurMax;
+    private int profondeur;
     /**
      * Represente un joueur
      *
@@ -17,12 +18,14 @@ public class AlphaBetaPlayer extends Player {
      */
     public AlphaBetaPlayer(Game g, boolean player_one, int valueOfParam) {
         super(g, player_one);
-        name = "Minmax";
+        name = "AlphaBeta";
+        profondeurMax = valueOfParam;
     }
 
     @Override
     public Action getMove(GameState state) {
         ActionValuePair actionValuePair;
+        profondeur = 0;
         if (player==PLAYER1){
             actionValuePair = maxValue(state, -Double.MAX_VALUE, Double.MAX_VALUE);
         } else {
@@ -32,7 +35,7 @@ public class AlphaBetaPlayer extends Player {
     }
 
     private ActionValuePair maxValue(GameState s, double alpha, double beta){
-        if (game.endOfGame(s)){
+        if (game.endOfGame(s) || profondeur >= profondeurMax){
             return new ActionValuePair(null, s.getGameValue());
         }
         double vMax = -Double.MIN_VALUE;
@@ -40,6 +43,7 @@ public class AlphaBetaPlayer extends Player {
         GameState sprime;
         for(Action c : game.getActions(s)){
             sprime = (GameState) game.doAction(s, c);
+            profondeur++;
             ActionValuePair vCprime = minValue(sprime, alpha, beta);
             if(vCprime.getValue() >= vMax){
                 vMax = vCprime.getValue();
@@ -57,14 +61,15 @@ public class AlphaBetaPlayer extends Player {
     }
 
     private ActionValuePair minValue(GameState s, double alpha, double beta){
-        if (game.endOfGame(s)){
+        if (game.endOfGame(s) || profondeur >= profondeurMax){
             return new ActionValuePair(null, s.getGameValue());
         }
-        double vMin = -Double.MIN_VALUE;
+        double vMin = Double.MAX_VALUE;
         Action cMin = null;
         GameState sprime;
         for(Action c : game.getActions(s)){
             sprime = (GameState) game.doAction(s, c);
+            profondeur++;
             ActionValuePair vCprime = maxValue(sprime, alpha, beta);
             if(vCprime.getValue() <= vMin){
                 vMin = vCprime.getValue();
@@ -80,4 +85,5 @@ public class AlphaBetaPlayer extends Player {
         }
         return new ActionValuePair(cMin, vMin);
     }
+
 }
