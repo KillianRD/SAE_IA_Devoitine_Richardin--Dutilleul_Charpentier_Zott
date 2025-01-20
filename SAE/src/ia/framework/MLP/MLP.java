@@ -1,7 +1,9 @@
 package ia.framework.MLP;
 
+import ia.framework.MLP.transferfunction.TransferFunction;
+
 public class MLP {
-    protected double fLearningRate = 0.6;
+    protected double fLearningRate;
     protected Layer[] fLayers;
     protected TransferFunction fTransferFunction;
 
