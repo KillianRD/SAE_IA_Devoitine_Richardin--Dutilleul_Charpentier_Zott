@@ -24,6 +24,6 @@ public class LancerRecherche {
         MLP mlp = ArgParse.makeMLP(args, func_name);
         Problem p = ArgParse.makeProblem(prob_name, mlp);
 
-        p.execute();
+        p.executeTraining(10_000);
     }
 }

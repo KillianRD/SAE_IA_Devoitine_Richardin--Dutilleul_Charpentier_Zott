@@ -21,11 +21,11 @@ public class MNIST extends Problem {
 
 
         inputs = new double[imagettes.size()][784]; // 784 = 28 * 28 (taille des images)
-        outputDesired = new double[imagettes.size()][1];
+        outputDesired = new double[imagettes.size()][10]; // 10 sorties possibles
 
         for (int i = 0; i < imagettes.size(); i++) {
             inputs[i] = MatrixUtils.flattenMatrix(imagettes.get(i).getDonnees());
-            outputDesired[i][0] = imagettes.get(i).getEtiquette();
+            outputDesired[i][(int) imagettes.get(i).getEtiquette()] = imagettes.get(i).getEtiquette();
         }
     }
 }
