@@ -7,26 +7,24 @@ import java.util.Arrays;
 
 
 public abstract class Problem {
-    protected MLP mlp;
     protected double[][] inputs;
     protected double[][] outputDesired;
     protected double errorThreshold = 0.01;
 
-    public Problem(MLP mlp) {
-        this.mlp = mlp;
+    public Problem() {
         init();
     }
 
     public abstract void init();
 
-    public void executeTraining(int nbIterations) {
+    public void executeTraining(int nbIterations, MLP mlp) {
         double erreur;
         int i = 0;
 
-        while (i < nbIterations && (erreur = train()) >= errorThreshold) {
+        while (i < nbIterations && (erreur = train(mlp)) >= errorThreshold) {
             if (ArgParse.DEBUG) {
                 System.out.printf("--- Session d'entraînement n°%d ---%n", i);
-                System.out.printf("Pourcentage d'erreur : %.4f%n", erreur);
+                System.out.printf("Taux d'erreur : %.4f%n", erreur);
             }
             i++;
         }
@@ -47,7 +45,7 @@ public abstract class Problem {
     }
 
 
-    private double train() {
+    private double train(MLP mlp) {
         double erreur = 0;
         for (int i = 0; i < inputs.length; i++) {
             erreur += mlp.backPropagate(inputs[i], outputDesired[i]);
@@ -55,8 +53,12 @@ public abstract class Problem {
         return erreur;
     }
 
-    public int getSizeInput() {
-        return inputs.length;
+    public double[][] getInputs() {
+        return inputs;
+    }
+
+    public double[][] getOutputDesired() {
+        return outputDesired;
     }
 }
 

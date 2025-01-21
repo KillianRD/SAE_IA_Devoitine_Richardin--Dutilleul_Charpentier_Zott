@@ -1,10 +1,8 @@
 package ia.problemes;
 
-import ia.framework.MLP.MLP;
-
 public class AND extends Problem {
-    public AND(MLP mlp) {
-        super(mlp);
+    public AND() {
+        super();
     }
 
     @Override

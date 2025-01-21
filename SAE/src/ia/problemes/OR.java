@@ -1,10 +1,9 @@
 package ia.problemes;
 
-import ia.framework.MLP.MLP;
 
 public class OR extends Problem {
-    public OR(MLP mlp) {
-        super(mlp);
+    public OR() {
+        super();
     }
 
     @Override

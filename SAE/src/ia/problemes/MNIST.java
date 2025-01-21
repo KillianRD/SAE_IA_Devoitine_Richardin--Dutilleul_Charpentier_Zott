@@ -1,15 +1,16 @@
 package ia.problemes;
 
-import ia.framework.MLP.MLP;
 import ia.framework.common.Imagette;
 import ia.framework.utils.FileUtils;
-import ia.framework.utils.MatrixUtils;
 
 import java.util.ArrayList;
 
+import static ia.framework.utils.MatrixUtils.flattenMatrix;
+import static ia.framework.utils.MatrixUtils.normalizeMatrix;
+
 public class MNIST extends Problem {
-    public MNIST(MLP mlp) {
-        super(mlp);
+    public MNIST() {
+        super();
     }
 
     @Override
@@ -19,13 +20,12 @@ public class MNIST extends Problem {
                 "/input/MNIST/train-labels.idx1-ubyte"
         );
 
-
         inputs = new double[imagettes.size()][784]; // 784 = 28 * 28 (taille des images)
         outputDesired = new double[imagettes.size()][10]; // 10 sorties possibles
 
         for (int i = 0; i < imagettes.size(); i++) {
-            inputs[i] = MatrixUtils.flattenMatrix(imagettes.get(i).getDonnees());
-            outputDesired[i][(int) imagettes.get(i).getEtiquette()] = imagettes.get(i).getEtiquette();
+            inputs[i] = flattenMatrix(normalizeMatrix(imagettes.get(i).getDonnees(), 255)); // coefficient pour normaliser les données entre 0 et 1.
+            outputDesired[i][(int) imagettes.get(i).getEtiquette()] = 1.0;
         }
     }
 }
