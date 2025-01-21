@@ -15,4 +15,16 @@ public class MatrixUtils {
 
         return res;
     }
+
+    public static double[][] normalizeMatrix(double[][] input, double coefficient) {
+        double[][] res = new double[input.length][input.length];
+
+        for (int l = 0; l < input.length; l++) {
+            for (int c = 0; c < input[0].length; c++) {
+                res[l][c] = input[l][c] / coefficient;
+            }
+        }
+
+        return res;
+    }
 }
