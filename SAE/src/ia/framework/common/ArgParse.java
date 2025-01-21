@@ -197,15 +197,15 @@ public class ArgParse {
 
         switch (problemName) {
             case "OR":
-                return new OR(mlp);
+                return new OR();
             case "AND":
-                return new AND(mlp);
+                return new AND();
             case "XOR":
-                return new XOR(mlp);
+                return new XOR();
             case "MNIST":
-                return new MNIST(mlp);
+                return new MNIST();
             case "FashionMNIST":
-                return new FashionMNIST(mlp);
+                return new FashionMNIST();
             default:
                 System.out.println("Problème inconnu");
                 usage();
