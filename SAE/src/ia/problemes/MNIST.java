@@ -15,17 +15,30 @@ public class MNIST extends Problem {
 
     @Override
     public void init() {
-        ArrayList<Imagette> imagettes = FileUtils.getImagettesFromFile(
+        ArrayList<Imagette> imagettesTrain = FileUtils.getImagettesFromFile(
                 "/input/MNIST/train-images.idx3-ubyte",
                 "/input/MNIST/train-labels.idx1-ubyte"
         );
 
-        inputs = new double[imagettes.size()][784]; // 784 = 28 * 28 (taille des images)
-        outputDesired = new double[imagettes.size()][10]; // 10 sorties possibles
+        ArrayList<Imagette> imagettesTest = FileUtils.getImagettesFromFile(
+                "/input/MNIST/t10k-images.idx3-ubyte",
+                "/input/MNIST/t10k-labels.idx1-ubyte"
+        );
 
-        for (int i = 0; i < imagettes.size(); i++) {
-            inputs[i] = flattenMatrix(normalizeMatrix(imagettes.get(i).getDonnees(), 255)); // coefficient pour normaliser les données entre 0 et 1.
-            outputDesired[i][(int) imagettes.get(i).getEtiquette()] = 1.0;
+        inputsTrain = new double[imagettesTrain.size()][784]; // 784 = 28 * 28 (taille des images)
+        outputDesiredTrain = new double[imagettesTrain.size()][10]; // 10 sorties possibles
+
+        for (int i = 0; i < imagettesTrain.size(); i++) {
+            inputsTrain[i] = flattenMatrix(normalizeMatrix(imagettesTrain.get(i).getDonnees(), 255)); // coefficient pour normaliser les données entre 0 et 1.
+            outputDesiredTrain[i][(int) imagettesTrain.get(i).getEtiquette()] = 1.0;
+        }
+
+        inputsTest = new double[imagettesTest.size()][784]; // 784 = 28 * 28 (taille des images)
+        outputDesiredTest = new double[imagettesTest.size()][10]; // 10 sorties possibles
+
+        for (int i = 0; i < imagettesTest.size(); i++) {
+            inputsTest[i] = flattenMatrix(normalizeMatrix(imagettesTest.get(i).getDonnees(), 255)); // coefficient pour normaliser les données entre 0 et 1.
+            outputDesiredTest[i][(int) imagettesTest.get(i).getEtiquette()] = 1.0;
         }
     }
 }

@@ -7,14 +7,28 @@ public class AND extends Problem {
 
     @Override
     public void init() {
-        inputs = new double[][]{
+        inputsTrain = new double[][]{
                 {0, 0},
                 {0, 1},
                 {1, 0},
                 {1, 1}
         };
 
-        outputDesired = new double[][]{
+        inputsTest = new double[][]{
+                {0, 0},
+                {0, 1},
+                {1, 0},
+                {1, 1}
+        };
+
+        outputDesiredTrain = new double[][]{
+                {0},
+                {0},
+                {0},
+                {1}
+        };
+
+        outputDesiredTest = new double[][]{
                 {0},
                 {0},
                 {0},

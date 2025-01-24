@@ -7,9 +7,11 @@ import java.util.Arrays;
 
 
 public abstract class Problem {
-    protected double[][] inputs;
-    protected double[][] outputDesired;
-    protected double errorThreshold = 0.01;
+    protected double[][] inputsTrain;
+    protected double[][] inputsTest;
+    protected double[][] outputDesiredTrain;
+    protected double[][] outputDesiredTest;
+    protected double errorThreshold = 0.1;
 
     public Problem() {
         init();
@@ -21,6 +23,7 @@ public abstract class Problem {
         double erreur;
         int i = 0;
 
+        //Entrainement
         while (i < nbIterations && (erreur = train(mlp)) >= errorThreshold) {
             if (ArgParse.DEBUG) {
                 System.out.printf("--- Session d'entraînement n°%d ---%n", i);
@@ -29,11 +32,12 @@ public abstract class Problem {
             i++;
         }
 
-        for (int j = 0; j < inputs.length; j++) {
+        // Résultat après l'entrainement sur les données d'entrainement
+        for (int j = 0; j < inputsTest.length; j++) {
             if (ArgParse.DEBUG) {
-                System.out.println("--- Sortie désirée : " + Arrays.toString(outputDesired[j]) + " ---");
+                System.out.println("--- Sortie désirée : " + Arrays.toString(outputDesiredTest[j]) + " ---");
             }
-            double[] res = mlp.execute(inputs[j]);
+            double[] res = mlp.execute(inputsTest[j]);
             if (ArgParse.DEBUG) {
                 System.out.print("Sortie reçu : ");
                 for (double re : res) {
@@ -47,18 +51,26 @@ public abstract class Problem {
 
     private double train(MLP mlp) {
         double erreur = 0;
-        for (int i = 0; i < inputs.length; i++) {
-            erreur += mlp.backPropagate(inputs[i], outputDesired[i]);
+        for (int i = 0; i < inputsTrain.length; i++) {
+            erreur += mlp.backPropagate(inputsTrain[i], outputDesiredTrain[i]);
         }
         return erreur;
     }
 
-    public double[][] getInputs() {
-        return inputs;
+    public double[][] getInputsTrain() {
+        return inputsTrain;
     }
 
-    public double[][] getOutputDesired() {
-        return outputDesired;
+    public double[][] getInputsTest() {
+        return inputsTest;
+    }
+
+    public double[][] getOutputDesiredTrain() {
+        return outputDesiredTrain;
+    }
+
+    public double[][] getOutputDesiredTest(){
+        return outputDesiredTest;
     }
 }
 
