@@ -16,8 +16,8 @@ public class Statistique {
     }
 
     public double getStatistique() {
-        double[][] inputs = problem.getInputs();
-        double[][] outputDesired = problem.getOutputDesired();
+        double[][] inputs = problem.getInputsTest();
+        double[][] outputDesired = problem.getOutputDesiredTest();
         int total = inputs.length;
         int correctCount = 0;
 
@@ -28,8 +28,42 @@ public class Statistique {
             }
         }
 
-        System.out.println("Nombre correct : " +  correctCount + " / " + inputs.length);
+        System.out.println("Nombre correct : " + correctCount + " / " + inputs.length);
         return (double) correctCount / total;
+    }
+
+    public String getStatistiquePerClasse() {
+        double[][] inputs = problem.getInputsTest();
+        double[][] outputDesired = problem.getOutputDesiredTest();
+        int total = inputs.length;
+        int numClasses = outputDesired[0].length;
+
+        double[][] output = new double[numClasses][2];
+
+        //Récupération des résultats
+        for (int i = 0; i < total; i++) {
+            double[] prediction = mlp.execute(inputs[i]);
+            int expectedIndex = indexOfMax(outputDesired[i]);
+            int predictedIndex = indexOfMax(prediction);
+
+            output[expectedIndex][1]++;
+            if (predictedIndex == expectedIndex) {
+                output[expectedIndex][0]++;
+            }
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < numClasses; i++) {
+            double correctCount = output[i][0];
+            double totalCount = output[i][1];
+            double percentageCorrect = (totalCount == 0) ? 0 : (correctCount / totalCount) * 100;
+
+            res.append("----- Classe ").append(i).append(" -----\n");
+            res.append("Pourcentage de réponses correctes : ").append(String.format("%.2f", percentageCorrect)).append("%\n");
+            res.append("Correctes : ").append((int) correctCount).append(" / Total : ").append((int) totalCount).append("\n");
+        }
+
+        return res.toString();
     }
 
     private boolean isCorrectPrediction(double[] prediction, double[] expected) {
