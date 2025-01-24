@@ -174,11 +174,11 @@ public class ArgParse {
 
         switch (functionName) {
             case "sigmoid":
-                return new MLP(getValueOfParam(args, "-layers", new int[]{2, 2}),
+                return new MLP(getValueOfParam(args, "-layers", new int[]{2, 2, 1}),
                         getValueOfParam(args, "-lr", 0.1),
                         new Sigmoide());
             case "tanh":
-                return new MLP(getValueOfParam(args, "-layers", new int[]{2, 2}),
+                return new MLP(getValueOfParam(args, "-layers", new int[]{2, 2, 1}),
                         getValueOfParam(args, "-lr", 0.1),
                         new TanH());
             default:
@@ -212,6 +212,12 @@ public class ArgParse {
                 System.exit(1);
         }
 
+        return null;
+    }
+
+    public static Statistique makeStats(String[] args, MLP mlp, Problem p) {
+        if(getFlagFromCmd(args, "-stats"))
+            return new Statistique(p, mlp);
         return null;
     }
 }
