@@ -1,8 +1,11 @@
 package ia.framework.utils;
 
+import ia.framework.MLP.MLP;
 import ia.framework.common.Imagette;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -50,5 +53,17 @@ public class FileUtils {
         }
 
         return new Imagette(imageData, imageNameTag);
+    }
+
+    public static void saveStatistique(String stats) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("res/output/Statistiques.txt", true));
+
+            bw.write(stats);
+
+            bw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
