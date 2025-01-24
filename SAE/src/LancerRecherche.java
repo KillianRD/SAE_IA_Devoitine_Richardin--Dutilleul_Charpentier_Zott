@@ -32,7 +32,7 @@ public class LancerRecherche {
         int nbIteration = ArgParse.getValueOfParam(args, "-nbIteration", 10);
 
         MLP mlp = ArgParse.makeMLP(args, func_name);
-        Problem p = ArgParse.makeProblem(prob_name, mlp);
+        Problem p = ArgParse.makeProblem(prob_name);
         Statistique s = ArgParse.makeStats(args, mlp, p);
 
         p.executeTraining(nbIteration, mlp);

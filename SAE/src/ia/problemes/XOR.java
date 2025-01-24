@@ -1,7 +1,5 @@
 package ia.problemes;
 
-import ia.framework.MLP.MLP;
-
 public class XOR extends Problem {
     public XOR() {
         super();
