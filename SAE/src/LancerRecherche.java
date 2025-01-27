@@ -15,7 +15,7 @@ public class LancerRecherche {
                          [-layers {int}] [-lr double] [-debug] [-stats]
 
                         -prob : Le nom du problem {OR, AND, XOR, MNIST, FashionMNIST}. Par défaut OR
-                        -batchSize : Taille des données d'entrainement (utile pour MNIST et Fashion MNIST)
+                        -batchSize : Taille des données d'entrainement (utile pour MNIST et Fashion MNIST). Par défaut 60 000
                         -nbIterations : nombre d'itérations pour l'entrainement du mlp
                         -func : fonction d'activation {sigmoid, tanh}. Par défault sigmoid
                         -layers : le nombre de neurones du réseau par couche. Par défaut {2, 2, 1}
