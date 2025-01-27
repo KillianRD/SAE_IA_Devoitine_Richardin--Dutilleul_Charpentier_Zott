@@ -26,7 +26,7 @@ public class AStar extends TreeSearch {
         frontier = new PriorityQueue<>(new Comparator<SearchNode>() {
             @Override
             public int compare(SearchNode o1, SearchNode o2) {
-                return (int) ((o1.getCost() + o1.getHeuristic()) - (o1.getCost() + o2.getHeuristic()));
+                return (int) ((o1.getCost() + o1.getHeuristic()) - (o2.getCost() + o2.getHeuristic()));
             }
         });
         frontier.add(SearchNode.makeRootSearchNode(initial_state));
