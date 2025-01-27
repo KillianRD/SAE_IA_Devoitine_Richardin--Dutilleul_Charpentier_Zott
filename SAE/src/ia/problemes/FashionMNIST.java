@@ -17,7 +17,7 @@ public class FashionMNIST extends Problem {
     }
 
     @Override
-    public void init(int batchSize) {
+    public void init() {
         ArrayList<Imagette> imagettesTrain = FileUtils.getImagettesFromFile(
                 "/input/Fashion_MNIST/train-images-idx3-ubyte",
                 "/input/Fashion_MNIST/train-labels-idx1-ubyte"

@@ -6,7 +6,7 @@ public class AND extends Problem {
     }
 
     @Override
-    public void init(int batchSize) {
+    public void init() {
         inputsTrain = new double[][]{
                 {0, 0},
                 {0, 1},

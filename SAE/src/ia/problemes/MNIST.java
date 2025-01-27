@@ -16,7 +16,7 @@ public class MNIST extends Problem {
     }
 
     @Override
-    public void init(int batchSize) {
+    public void init() {
         ArrayList<Imagette> imagettesTrain = FileUtils.getImagettesFromFile(
                 "/input/MNIST/train-images.idx3-ubyte",
                 "/input/MNIST/train-labels.idx1-ubyte"

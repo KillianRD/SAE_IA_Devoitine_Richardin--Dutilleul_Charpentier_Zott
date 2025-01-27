@@ -11,6 +11,7 @@ public abstract class Problem {
     protected double[][] inputsTest;
     protected double[][] outputDesiredTrain;
     protected double[][] outputDesiredTest;
+    protected int batchSize;
     protected double errorThreshold = 0.1;
 
     public Problem(int batchSize) {
@@ -18,10 +19,10 @@ public abstract class Problem {
             batchSize = 60_000;
         }
 
-        init(batchSize);
+        init();
     }
 
-    public abstract void init(int batchSize);
+    public abstract void init();
 
     public void executeTraining(int nbIterations, MLP mlp) {
         double erreur;
