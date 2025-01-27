@@ -13,11 +13,15 @@ public abstract class Problem {
     protected double[][] outputDesiredTest;
     protected double errorThreshold = 0.1;
 
-    public Problem() {
-        init();
+    public Problem(int batchSize) {
+        if (batchSize < 0 || batchSize > 60_000) {
+            batchSize = 60_000;
+        }
+
+        init(batchSize);
     }
 
-    public abstract void init();
+    public abstract void init(int batchSize);
 
     public void executeTraining(int nbIterations, MLP mlp) {
         double erreur;
@@ -69,7 +73,7 @@ public abstract class Problem {
         return outputDesiredTrain;
     }
 
-    public double[][] getOutputDesiredTest(){
+    public double[][] getOutputDesiredTest() {
         return outputDesiredTest;
     }
 }

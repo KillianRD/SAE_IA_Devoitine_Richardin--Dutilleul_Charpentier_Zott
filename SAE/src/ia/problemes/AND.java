@@ -1,12 +1,12 @@
 package ia.problemes;
 
 public class AND extends Problem {
-    public AND() {
-        super();
+    public AND(int batchSize) {
+        super(batchSize);
     }
 
     @Override
-    public void init() {
+    public void init(int batchSize) {
         inputsTrain = new double[][]{
                 {0, 0},
                 {0, 1},
