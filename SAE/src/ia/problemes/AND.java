@@ -1,8 +1,8 @@
 package ia.problemes;
 
 public class AND extends Problem {
-    public AND() {
-        super();
+    public AND(int batchSize) {
+        super(batchSize);
     }
 
     @Override

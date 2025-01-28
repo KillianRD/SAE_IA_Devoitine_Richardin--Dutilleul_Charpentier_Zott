@@ -1,8 +1,8 @@
 package ia.problemes;
 
 public class XOR extends Problem {
-    public XOR() {
-        super();
+    public XOR(int batchSize) {
+        super(batchSize);
     }
 
     @Override

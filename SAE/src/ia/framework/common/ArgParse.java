@@ -190,22 +190,22 @@ public class ArgParse {
         return null;
     }
 
-    public static Problem makeProblem(String problemName) {
+    public static Problem makeProblem(String[] args, String problemName) {
         if (problemName == null) {
             problemName = "OR";
         }
 
         switch (problemName) {
             case "OR":
-                return new OR();
+                return new OR(0);
             case "AND":
-                return new AND();
+                return new AND(0);
             case "XOR":
-                return new XOR();
+                return new XOR(0);
             case "MNIST":
-                return new MNIST();
+                return new MNIST(getValueOfParam(args, "-batchSize", 60000));
             case "FashionMNIST":
-                return new FashionMNIST();
+                return new FashionMNIST(getValueOfParam(args, "-batchSize", 60000));
             default:
                 System.out.println("Problème inconnu");
                 usage();

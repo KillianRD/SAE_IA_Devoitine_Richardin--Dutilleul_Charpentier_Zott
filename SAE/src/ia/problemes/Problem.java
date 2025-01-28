@@ -12,8 +12,14 @@ public abstract class Problem {
     protected double[][] outputDesiredTrain;
     protected double[][] outputDesiredTest;
     protected double errorThreshold = 0.1;
+    protected int batchSize;
 
-    public Problem() {
+    public Problem(int batchSize) {
+        if (batchSize < 0 || batchSize > 60_000) {
+            batchSize = 60_000;
+        }
+
+        this.batchSize = batchSize;
         init();
     }
 
@@ -35,16 +41,16 @@ public abstract class Problem {
         // Résultat après l'entrainement sur les données d'entrainement
         for (int j = 0; j < inputsTest.length; j++) {
             if (ArgParse.DEBUG) {
-                System.out.println("--- Sortie désirée : " + Arrays.toString(outputDesiredTest[j]) + " ---");
+                //System.out.println("--- Sortie désirée : " + Arrays.toString(outputDesiredTest[j]) + " ---");
             }
             double[] res = mlp.execute(inputsTest[j]);
-            if (ArgParse.DEBUG) {
+            /*if (ArgParse.DEBUG) {
                 System.out.print("Sortie reçu : ");
                 for (double re : res) {
                     System.out.printf("%.2f ", re);
                 }
                 System.out.println();
-            }
+            }*/
         }
     }
 
@@ -69,7 +75,7 @@ public abstract class Problem {
         return outputDesiredTrain;
     }
 
-    public double[][] getOutputDesiredTest(){
+    public double[][] getOutputDesiredTest() {
         return outputDesiredTest;
     }
 }

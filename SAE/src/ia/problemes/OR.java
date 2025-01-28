@@ -2,8 +2,8 @@ package ia.problemes;
 
 
 public class OR extends Problem {
-    public OR() {
-        super();
+    public OR(int batchSize) {
+        super(batchSize);
     }
 
     @Override
