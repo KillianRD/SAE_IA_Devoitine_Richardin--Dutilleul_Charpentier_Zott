@@ -35,6 +35,8 @@ public class AlphaBetaPlayer extends Player {
     }
 
     private ActionValuePair maxValue(GameState s, double alpha, double beta){
+        this.incStateCounter();
+
         if (game.endOfGame(s) || profondeur >= profondeurMax){
             return new ActionValuePair(null, s.getGameValue());
         }
@@ -61,6 +63,8 @@ public class AlphaBetaPlayer extends Player {
     }
 
     private ActionValuePair minValue(GameState s, double alpha, double beta){
+        this.incStateCounter();
+
         if (game.endOfGame(s) || profondeur >= profondeurMax){
             return new ActionValuePair(null, s.getGameValue());
         }

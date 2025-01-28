@@ -32,6 +32,8 @@ public class MinMaxPlayer extends Player {
     }
 
     private ActionValuePair maxValue(GameState s){
+        this.incStateCounter();
+
         if (game.endOfGame(s)){
             return new ActionValuePair(null, s.getGameValue());
         }
@@ -50,6 +52,8 @@ public class MinMaxPlayer extends Player {
     }
 
     private ActionValuePair minValue(GameState s){
+        this.incStateCounter();
+
         if (game.endOfGame(s)){
             return new ActionValuePair(null, s.getGameValue());
         }

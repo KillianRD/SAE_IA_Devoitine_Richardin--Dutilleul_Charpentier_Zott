@@ -30,6 +30,7 @@ public class RandomPlayer extends Player {
      * <p>Retourn un coup aléatoire</p>
      */
     public Action getMove(GameState state){
+        this.incStateCounter();
         return game.getRandomMove(state);
     }
 
