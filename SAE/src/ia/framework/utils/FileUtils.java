@@ -2,10 +2,7 @@ package ia.framework.utils;
 
 import ia.framework.common.Imagette;
 
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -55,12 +52,15 @@ public class FileUtils {
     }
 
     public static void saveStatistique(String stats) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("res/output/Statistiques.txt", true));
+        File file = new File("res/output/Statistiques.txt");
 
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
             bw.write(stats);
-
-            bw.close();
+            bw.newLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
