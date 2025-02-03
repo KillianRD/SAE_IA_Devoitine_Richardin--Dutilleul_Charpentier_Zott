@@ -7,34 +7,34 @@ import ia.problemes.Problem;
  * Classe représentant les statistiques
  */
 public class Statistique {
-    private final Problem problem;
-    private final MLP mlp;
+    private static Problem PROBLEM = null;
+    private static MLP MLP = null;
 
     public Statistique(Problem problem, MLP mlp) {
-        this.problem = problem;
-        this.mlp = mlp;
+        PROBLEM = problem;
+        MLP = mlp;
     }
 
-    public double getStatistique() {
-        double[][] inputs = problem.getInputsTest();
-        double[][] outputDesired = problem.getOutputDesiredTest();
+    public static double getStatistique() {
+        double[][] inputs = PROBLEM.getInputsTest();
+        double[][] outputDesired = PROBLEM.getOutputDesiredTest();
         int total = inputs.length;
         int correctCount = 0;
 
         for (int i = 0; i < total; i++) {
-            double[] prediction = mlp.execute(inputs[i]);
+            double[] prediction = MLP.execute(inputs[i]);
             if (isCorrectPrediction(prediction, outputDesired[i])) {
                 correctCount++;
             }
         }
 
-        System.out.println("Nombre correct : " + correctCount + " / " + inputs.length);
+        //System.out.println("Nombre correct : " + correctCount + " / " + inputs.length);
         return (double) correctCount / total;
     }
 
     public String getStatistiquePerClasse() {
-        double[][] inputs = problem.getInputsTest();
-        double[][] outputDesired = problem.getOutputDesiredTest();
+        double[][] inputs = PROBLEM.getInputsTest();
+        double[][] outputDesired = PROBLEM.getOutputDesiredTest();
         int total = inputs.length;
         int numClasses = outputDesired[0].length;
 
@@ -42,7 +42,7 @@ public class Statistique {
 
         //Récupération des résultats
         for (int i = 0; i < total; i++) {
-            double[] prediction = mlp.execute(inputs[i]);
+            double[] prediction = MLP.execute(inputs[i]);
             int expectedIndex = indexOfMax(outputDesired[i]);
             int predictedIndex = indexOfMax(prediction);
 
@@ -66,13 +66,13 @@ public class Statistique {
         return res.toString();
     }
 
-    private boolean isCorrectPrediction(double[] prediction, double[] expected) {
+    private static boolean isCorrectPrediction(double[] prediction, double[] expected) {
         int predictedIndex = indexOfMax(prediction);
         int expectedIndex = indexOfMax(expected);
         return predictedIndex == expectedIndex;
     }
 
-    private int indexOfMax(double[] array) {
+    private static int indexOfMax(double[] array) {
         int index = 0;
         double max = array[0];
         for (int i = 1; i < array.length; i++) {

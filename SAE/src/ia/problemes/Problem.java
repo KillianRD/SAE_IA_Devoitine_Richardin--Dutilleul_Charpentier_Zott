@@ -2,9 +2,7 @@ package ia.problemes;
 
 import ia.framework.MLP.MLP;
 import ia.framework.common.ArgParse;
-
-import java.util.Arrays;
-
+import ia.framework.common.Statistique;
 
 public abstract class Problem {
     protected double[][] inputsTrain;
@@ -29,11 +27,18 @@ public abstract class Problem {
         double erreur;
         int i = 0;
 
+        if (ArgParse.DEBUG) {
+            System.out.printf("--- Session de test n°%d sans entraînement---%n", i);
+            System.out.printf("Pourcentage : %.4f%n", Statistique.getStatistique());
+        }
+
         //Entrainement
         while (i < nbIterations && (erreur = train(mlp)) >= errorThreshold) {
             if (ArgParse.DEBUG) {
                 System.out.printf("--- Session d'entraînement n°%d ---%n", i);
                 System.out.printf("Taux d'erreur : %.4f%n", erreur);
+                System.out.printf("--- Session de test n°%d ---%n", i);
+                System.out.printf("Pourcentage : %.4f%n", Statistique.getStatistique());
             }
             i++;
         }
